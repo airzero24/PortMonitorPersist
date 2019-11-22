@@ -1,0 +1,4 @@
+C:\Users\defaultuser\source\repos\printmon\PortMonitorPersist\bin\Release\PortMonitorPersist.exe
+C:\Users\defaultuser\source\repos\printmon\PortMonitorPersist\obj\Release\PortMonitorPersist.csproj.CoreCompileInputs.cache
+C:\Users\defaultuser\source\repos\printmon\PortMonitorPersist\obj\Release\PortMonitorPersist.exe
+C:\Users\defaultuser\source\repos\printmon\PortMonitorPersist\obj\Release\PortMonitorPersist.csprojAssemblyReference.cache
