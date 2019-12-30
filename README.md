@@ -32,6 +32,7 @@ This technique partially creates a new `Port Monitor` on the windows host. I say
 Registry
 - Monitor for new subkey's being created for the registry key `HKLM\SYSTEM\CurrentControlSet\Control\Print\Monitors`
     - This may have some false positives depending on your environment printer configurations but shouldn't be overly noisey and easy to baseline.
+    - `SACL`'s may be an effective means of alert generation for this. See: [Set-AuditRule](https://github.com/hunters-forge/Set-AuditRule)
 
 spoolsv.exe
 - Monitor for outbound network connections from the `spoolsv.exe` process.
