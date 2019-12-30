@@ -1,6 +1,6 @@
 # Persistence via Port Monitor 
 
-This PoC creates persistence on a system by creating a new registry key under `HKLM\SYSTEM\CurrentControlSet\Control\Print\Monitors`, and specifies a Dll to be loaded. This will load the specified Dll into the `spoolsvc.exe` process on system boot.
+This PoC creates persistence on a system by creating a new registry key under `HKLM\SYSTEM\CurrentControlSet\Control\Print\Monitors`, and specifies a Dll to be loaded. This will load the specified Dll into the `spoolsv.exe` process on system boot.
 
 >Note: This method requires Administrative privileges as it modifies the Local Machine registry hive
 
@@ -25,6 +25,17 @@ Delete Port Monitor persistence default registry key:
 Delete specified Port Monitor persistence registry key:
     PortMonitorPersist.exe clear "Microsoft Shared Print Monitor"
 ```
+
+## Detection
+This technique partially creates a new `Port Monitor` on the windows host. I say partially as this implementation only creates the resulting registry key specifying the `PortMonitorDll` to be loaded by `spoolsv.exe`. The more complete method of creating a new `Port Monitor` can be done through the Windows GUI `Control panel`, or through the Windows API `AddPortMonitor`. Therefore, other detection artifacts may result of these other implementations of this technique.
+
+Registry
+- Monitor for new subkey's being created for the registry key `HKLM\SYSTEM\CurrentControlSet\Control\Print\Monitors`
+    - This may have some false positives depending on your environment printer configurations but shouldn't be overly noisey and easy to baseline.
+
+spoolsv.exe
+- Monitor for outbound network connections from the `spoolsv.exe` process.
+    - This may have some false positives for internal network traffic depending on environment printer configuration, but should be a rare occurance for outbound traffic.
 
 ## Resources
 - [ESET](https://blog.eset.ie/2019/11/21/registers-as-default-print-monitor-but-is-a-malicious-downloader-meet-deprimon-a/)
